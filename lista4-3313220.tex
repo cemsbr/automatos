@@ -1,0 +1,112 @@
+\documentclass[brazil, a4paper,12pt]{article}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{geometry}
+\usepackage{amssymb} % therefore
+\geometry{a4paper,left=3cm,right=3cm,top=2.5cm,bottom=2.5cm}
+
+\begin{document}
+\begin{titlepage}
+
+  \vfill
+
+  \begin{center}
+    \begin{large}
+      Universidade de São Paulo
+    \end{large}
+  \end{center}
+
+  \begin{center}
+    \begin{large}
+      Instituto de Matemática e Estatística
+    \end{large}
+  \end{center}
+
+  \begin{center}
+    \begin{large}
+      Programa de Pós-Graduação em Ciência da Computação
+    \end{large}
+  \end{center}
+
+  \vfill
+
+  \begin{center}
+    \begin{Large}
+        \textbf{MAC4722}\\
+        \textbf{Linguagens, Autômatos e Computabilidade}\\
+          Lista 4\\
+    \end{Large}
+  \end{center}
+
+  \vfill
+
+  \begin{center}
+    \begin{large}
+      Professor Arnaldo Mandel
+    \end{large}
+  \end{center}
+
+  \begin{center}
+    \begin{large}
+      Carlos Eduardo Moreira dos Santos
+    \end{large}
+  \end{center}
+
+  \vfill
+
+  \begin{center}
+    \begin{large}
+      São Paulo \\
+      \today \\
+    \end{large}
+  \end{center}
+
+\clearpage
+\end{titlepage}
+
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Questão 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item Construa gramáticas
+  \begin{enumerate}
+    \item $L = \{a^nb^mc^{2(m+n)} \mid m, n > 0\}$
+
+    Seja a gramática $G$:
+
+    \begin{enumerate}
+      \item $S \rightarrow aScc$ \label{regra1a1}
+      \item $S \rightarrow aBcc$ \label{regra1a2}
+      \item $B \rightarrow bBcc$ \label{regra1a3}
+      \item $B \rightarrow bcc$ \label{regra1a4}
+    \end{enumerate}
+
+    A menor derivação possível é $S \Rightarrow aBcc \Rightarrow abcccc$ que
+    gera a menor palavra de $L$ ($m, n = 1 > 0$). A última regra produz
+    $bcc$, utilizado na terceira para gerar palavras do tipo $b^mc^{2m}$. A
+    primeira regra torna possível prefixar $a^n$ e sufixar $c^{2n}$. Por
+    fim, a segunda regra permite inserir $b^mc^{2m}$ entre um $a$ e um $c$
+    de $a^nb^{2n}$. Dessa forma, obtemos $a^nb^mc^{2m}c^{2n} =
+    a^nb^mc^{2(m+n)} \in L$.
+
+  \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Questão 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Questão 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Questão 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Questão 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+
+\end{enumerate}
+
+\end{document}
+
+% vim: set tw=80 fo=ct:
+% set fo+=a for autowrap
