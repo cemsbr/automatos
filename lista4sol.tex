@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{indentfirst}
 \usepackage{geometry}
+\usepackage{mathtools} % align
 \usepackage{amssymb} % therefore
 \geometry{a4paper,left=3cm,right=3cm,top=2.5cm,bottom=2.5cm}
 
@@ -83,26 +84,64 @@
     \end{enumerate}
 
     A menor derivação possível é $S \Rightarrow aBcc \Rightarrow abcccc$ que
-    gera a menor palavra de $L$ ($m, n = 1 > 0$). A última regra produz
-    $bcc$, utilizado na terceira para gerar palavras do tipo $b^mc^{2m}$. A
-    primeira regra torna possível prefixar $a^n$ e sufixar $c^{2n}$. Por
-    fim, a segunda regra permite inserir $b^mc^{2m}$ entre um $a$ e um $c$
-    de $a^nb^{2n}$. Dessa forma, obtemos $a^nb^mc^{2m}c^{2n} =
-    a^nb^mc^{2(m+n)} \in L$.
+    gera a menor palavra de $L$ ($m, n = 1 > 0$). A última regra produz $bcc$,
+    utilizado na terceira para gerar palavras do tipo $b^mc^{2m}$. A primeira
+    regra torna possível prefixar $a^n$ e sufixar $c^{2n}$. Por fim, a segunda
+    regra permite inserir $b^mc^{2m}$ entre um $a$ e um $c$ de $a^nb^{2n}$.
+    Dessa forma, obtemos palavras do tipo $a^nb^mc^{2m}c^{2n} =
+    a^nb^mc^{2(m+n)}$. Portanto $L(G) = L$.
 
-    \item $\{w \in \{a,b\}^* \mid$ o número de $a$'s é o dobro do número de
+    \item $L = \{w \in \{a,b\}^* \mid$ o número de $a$'s é o dobro do número de
     $b$'s$\}$
 
-    $S \rightarrow SA \mid AS \mid \lambda\\
-     A \rightarrow aab \mid aba \mid baa$
+    Seja a gramática $G$:
 
-     Na primeira regra, a gramática acima pode produzir $\lambda \in L$ ou
-     seguir para a segunda regra $A$ que, por sua vez, possui todas as palavras
-     de comprimento mínimo $\in L$ (excluindo $\lambda$ da regra anterior), ou
-     seja, todas as permutações de $aab$. Através da recursão na primeira regra,
-     tanto pela esquerda quanto pela direita, podemos gerar todas as palavras de
-     $L$.  Portanto, todas as palavras de $L$ são geradas pela gramática e todas
-     as palavras geradas pela gramática pertencem a $L$.
+    $S_0 \rightarrow S_1aab \mid aS_1ab \mid aaS_1b \mid aabS_1 \\
+     S_0 \rightarrow S_1aba \mid aS_1ba \mid abS_1a \mid abaS_1 \\
+     S_0 \rightarrow S_1baa \mid bS_1aa \mid baS_1a \mid baaS_1 \\
+     S_1 \rightarrow S_0 \mid \lambda$
+
+    A prova de que $L(G) \subseteq L$ segue por indução no comprimento da palavra.
+
+    \begin{description}
+      \item[Hipótese de indução:] $|w_n|_a = 2|w_n|_b$, onde $n$ é o comprimento de
+    $w$ e $|w|_x$ é a quantidade de letras $x$ em $w$.
+
+      \item[Base:] Para $n = 0$, temos $w = \lambda$ e $|w_0|_a = 0 = 2 \times 0 =
+    2|w_0|_b$.
+
+      \item[Passo indutivo:] O comprimento pode ser aumento por duas maneiras:
+      \begin{itemize}
+        \item Acrescentando 0 $a$'s e 0 $b$'s:
+          \begin{align*}
+            |w_n|_a &= |w_{n-1}|_a + 0 \\
+            |w_n|_b &= |w_{n-1}|_b + 0 \\
+            \\
+            |w_{n-1}|_a &\overset{HI}{=} 2|w_{n-1}|_b \\
+            |w_{n-1}|_a + 0 &= 2|w_{n-1}|_b + 0 \\
+            |w_n|_a &= 2|w_n|_b
+          \end{align*}
+
+        \item Acrescentando 2 $a$'s e 1 $b$:
+          \begin{align*}
+            |w_n|_a &= |w_{n-1}|_a + 2 \\
+            |w_n|_b &= |w_{n-1}|_b + 1 \\
+            \\
+            |w_{n-1}|_a &\overset{HI}{=} 2|w_{n-1}|\\
+            |w_{n-1}|_a + 2 &= 2|w_{n-1}|_b + 2\\
+            |w_{n-1}|_a + 2 &= 2(|w_{n-1}|_b + 1)\\
+            |w_n|_a &= 2|w_n|_b
+          \end{align*}
+      \end{itemize}
+
+    \end{description}
+
+    Podemos notar que $L(G) \supseteq L$ pela construção da gramática. As três
+    primeiras regras contêm todas as permutações de 2 $a$'s e 1 $b$, sendo cada
+    uma em uma linha. É possível aumentar o comprimento da palavra em múltiplos
+    de 3 através de $S_1$, colocado em todas as posições possíveis de cada
+    permutação de $a$'s e $b$. Assim, todas as palavras de $L$ podem ser geradas
+    pela gramática. Portanto, podemos concluir que $L(G) = L$.
 
 
   \item Disponível no arquivo em anexo: \textbf{string-repetida-complemento.pdf}
