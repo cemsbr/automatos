@@ -1,0 +1,509 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Structured General Purpose Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{array}
+
+% For automata
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{shapes.multipart}
+
+\newcommand{\qed}{\hfill \ensuremath{\Box}}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Página\ \thepage\ de\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continua na próxima página\ldots}\nobreak
+\nobreak\extramarks{#1 (continua)}{#1 continua na próxima página\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continua)}{#1 continua na próxima página\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{3\textsuperscript{a} Lista de Exercícios} % Assignment title
+\newcommand{\hmwkDueDate}{Quarta,\ 22\ de\ Maio,\ 2013} % Due date
+\newcommand{\hmwkClass}{MAC\ 4722} % Course/class
+\newcommand{\hmwkClassInstructor}{Arnaldo Mandel} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Andrew Kurauchi} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+}
+
+\author{\textbf{\hmwkAuthorName} - nusp: 5894035}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+
+\section{Exercício 1}
+
+Construa gramáticas para as linguagens:
+
+\begin{enumerate}[(a)]
+	\item $\{a^nb^mc^{2(n+m)}|m,n\geq 0\}$
+	\item $\{w\in\{a,b\}^*|\text{o número de }a\text{'s é o dobro do número de }b\text{'s}\}$
+	\item $\{w\in\{a,b\}^*|w\text{ não é da forma }xx\}$
+\end{enumerate}
+
+\subsection{Resolução}
+
+\subsubsection{(a)}
+
+Considere a gramática $G = (V, \Sigma, P, S)$ onde:
+
+\begin{itemize}
+	\item $V = \{S, B, a, b, c\}$
+	\item $\Sigma = \{a, b, c\}$
+	\item $P:$
+	\begin{itemize}
+		\item $S\rightarrow aScc | B$
+		\item $B\rightarrow bBcc | \lambda$
+	\end{itemize}
+\end{itemize}
+
+% TODO falta mostrar que reconhece a linguagem
+
+\subsubsection{(b)}
+
+Considere a gramática $G = (V, \Sigma, P, S)$ onde:
+
+\begin{itemize}
+	\item $V = \{S, a, b\}$
+	\item $\Sigma = \{a, b\}$
+	\item $P=\{S\rightarrow SaSaSbS | SaSbSaS | SbSaSaS | \lambda\}$
+\end{itemize}
+
+% TODO falta mostrar que reconhece a linguagem
+
+\subsubsection{(c)}
+
+% TODO
+
+\section{Exercício 2}
+
+Para as linguagens abaixo, construa autômato com pilha determinístico, ou um não determinístico, mas nesse caso explique por que não conseguiu fazer determinístico:
+
+\begin{enumerate}[(a)]
+	\item $\{0^n1^n2^k|n,k\geq 0\}$
+	\item $\{w\in\{a,b\}^*|w\text{ tem um prefixo com mais }a\text{'s do que }b\text{'s}\}$
+	\item $\{w\in\{a,b\}^*|w\text{ tem um sufixo com mais }a\text{'s do que }b\text{'s}\}$
+\end{enumerate}
+
+\subsection{Resolução}
+
+\subsubsection{(a)}
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+
+	\node[initial,state]     (A)              {};
+	\node[state]             (B) [right of=A] {};
+	\node[state,accepting]   (C) [right of=B] {};
+
+
+	\path (A) edge [loop above]  node {0,$\lambda$/0} (A)
+			  edge []			 node {1,0/$\lambda$} (B)
+		  (B) edge [loop above]  node {1,0/$\lambda$} (B)
+			  edge []		     node {2,$\lambda/\lambda$} (C)
+		  (C) edge [loop above]  node {2,$\lambda/\lambda$} (C);
+\end{tikzpicture}
+\end{center}
+
+% TODO mostrar que reconhece L
+
+\subsubsection{(b)}
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+
+	\node[initial,state]     (A)              {};
+	\node[state]             (B) [right of=A] {};
+	\node[state,accepting]   (C) [right of=B] {};
+
+
+	\path (A) edge []			 node {$\lambda$,$\lambda/0$} (B)
+		  (B) edge [loop above]  node {$a,b/\lambda$} (B)
+			  edge [loop below]  node {$b,\lambda/b$} (B)
+			  edge []		     node {$a,0/\lambda$} (C)
+		  (C) edge [loop above]  node {$a,\lambda/\lambda$} (C)
+			  edge [loop below]  node {$b,\lambda/\lambda$} (C);
+\end{tikzpicture}
+\end{center}
+
+% TODO mostrar que reconhece L
+
+\subsubsection{(c)}
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+
+	\node[initial,state]     (A)              {};
+	\node[state,accepting]   (B) [right of=A] {};
+
+
+	\path (A) edge [loop above]	 node {$b,\lambda/\lambda$} (A)
+			  edge [bend left]   node {$a,\lambda/0$} (B)
+		  (B) edge [loop above]  node {$a,\lambda/a$} (B)
+			  edge [loop below]  node {$b,a/\lambda$} (B)
+			  edge [bend left]   node {$b,0/\lambda$} (A);
+\end{tikzpicture}
+\end{center}
+
+% TODO mostrar que reconhece L
+
+\section{Exercício 3}
+
+Construa MT para as seguintes linguagens (explicando como funcionam):
+
+\begin{enumerate}[(a)]
+	\item $\{a^mb^n|m\neq n\}$
+	\item $\{a^nb^nc^n|n\geq 0\}$
+	\item $\{ww|w\in\{a,b\}^*\}$
+\end{enumerate}
+
+\subsection{Resolução}
+
+\subsubsection{(a)}
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+
+	\node[initial,state]     (A)              {};
+	\node[state]		     (B) [above right of=A] {};
+	\node[state]		     (C) [left of=B] {};
+	\node[state]		     (D) [below right of=A] {};
+	\node[state]		     (E) [left of=D] {};
+	\node[state,accepting]   (F) [below right of=B] {$q_\text{aceita}$};
+
+
+	\path (A) edge [loop right]	 node {$\begin{matrix}a'\rightarrow a',D\\b'\rightarrow b',D\end{matrix}$} (A)
+			  edge [bend left]   node [swap]{$a\rightarrow a', D$} (B)
+			  edge [bend right]  node {$b\rightarrow b', D$} (D)
+		  (B) edge [loop above]  node {$\begin{matrix}a\rightarrow a,D\\a'\rightarrow a',D\\b'\rightarrow b',D\end{matrix}$} (B)
+			  edge				 node [swap]{$b\rightarrow b',E$} (C)
+			  edge				 node {$\text{\textvisiblespace,\textvisiblespace}, D$} (F)
+		  (C) edge [loop above]  node {$\begin{matrix}b'\rightarrow b',E\\a\rightarrow a,E\end{matrix}$} (C)
+			  edge				 node [swap]{$a'\rightarrow a',D$} (A)
+		  (D) edge [loop below]  node {$\begin{matrix}b\rightarrow b,D\\a'\rightarrow a',D\\b'\rightarrow b',D\end{matrix}$} (D)
+			  edge				 node {$a\rightarrow a',E$} (E)
+			  edge				 node [swap]{$\text{\textvisiblespace,\textvisiblespace}, D$} (F)
+		  (E) edge [loop below]  node {$\begin{matrix}a'\rightarrow a',E\\b\rightarrow b,E\end{matrix}$} (E)
+			  edge				 node {$b'\rightarrow b',D$} (A);
+\end{tikzpicture}
+\end{center}
+
+% TODO mostrar que reconhece L
+% Para voltar para A não ocorre a (embaixo) e b (em cima)
+% Encontra o par e volta até a parte já lida
+% A esquerda do estado inicial já foi tudo lido
+
+\subsubsection{(b)}
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+
+	\node[initial,state]     (A)              {};
+	\node[state]		     (B) [right of=A] {};
+	\node[state]		     (C) [right of=B] {};
+	\node[state]		     (D) [right of=C] {};
+	\node[state,accepting]   (E) [above of=A] {$q_\text{aceita}$};
+
+
+	\path (A) edge [loop below]	 node {$\begin{matrix}a'\rightarrow a',D\\b'\rightarrow b',D\\c'\rightarrow c',D\end{matrix}$} (A)
+			  edge				 node {$a\rightarrow a', D$} (B)
+			  edge				 node {$\text{\textvisiblespace}\rightarrow \text{\textvisiblespace}, E$} (E)
+		  (B) edge [loop above]  node {$\begin{matrix}a\rightarrow a,D\\b'\rightarrow b',D\end{matrix}$} (B)
+			  edge				 node {$b\rightarrow b',D$} (C)
+		  (C) edge [loop above]  node {$\begin{matrix}b\rightarrow b,D\\c'\rightarrow c',D\end{matrix}$} (C)
+			  edge				 node {$c\rightarrow c',E$} (D)
+		  (D) edge [loop above]  node {$\begin{matrix}a\rightarrow a,E\\b\rightarrow b,E\\b'\rightarrow b',E\\c'\rightarrow c',E\end{matrix}$} (D)
+			  edge [bend left]   node {$a'\rightarrow a',D$} (A);
+\end{tikzpicture}
+\end{center}
+
+% TODO mostrar que reconhece L
+% Em D não ocorre c, pois já foi pra esquerda
+% Em A tudo a esquerda já foi contado
+
+\subsubsection{(c)}
+
+% Não vou resolver porque vai ficar muito grande
+% 1) Primeiro encontra o meio - marca o primeiro, vai até o último e marca. Volta até o último marcado, marca e vai até o último não marcado, etc.
+% 2) Se não encontra o par então a palavra não é ww e pode rejeitar a palavra, senão marca o meio e volta para o começo
+% 3) Marca o primeiro e vai até o último marcado. Marca o próximo e volta. Se for igual ao primeiro volta, senão rejeita.
+% 4) Se chegar no último (espaço), verifica se a última letra é igual e decide.
+
+\section{Exercício 4}
+
+Construa MT que:
+
+\begin{enumerate}[(a)]
+	\item Copia o conteúdo da fita 1 na fita 2
+	\item Procure na fita 1 o texto $(w,$, onde $w$ é o conteúdo da fita 2, e os símbolos $(,$ não ocorrem em $w$.
+\end{enumerate}
+
+\subsection{Resolução}
+
+Utilizaremos a seguinte notação para indicar uma transição: $\sigma_1,sigma_2\rightarrow (\sigma_3, d_1),(\sigma_4, d_2)$ onde $\sigma_1$ é o caracter na cabeça de leitura na fita 1, e $\sigma_2$ é o caracter na cabeça de leitura na fita 2, que são substituídos por $\sigma_3$ e $\sigma_4$ respectivamente e a cabeça de leitura da fita 1 se move para $d_1$ e a cabeça da fita 2 se move para $d_2$, $d_1, d_2\in\{E,D,F\}$ ($F$ indica que a cabeça permanece no mesmo local).
+
+\subsubsection{(a)}
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=4.8cm,
+                    semithick]
+
+	\node[initial,state]   (A)              {};
+	\node[state,accepting] (B) [right of=A] {$q_\text{aceita}$};
+
+	\path (A) edge [loop above]	 node {$\sigma,\text{\textvisiblespace}\rightarrow(\sigma,D),(\sigma,D), \sigma\in\Gamma$} (A)
+			  edge				 node {$\text{\textvisiblespace,\textvisiblespace}\rightarrow (\text{\textvisiblespace},D),(\text{\textvisiblespace},D)$} (B);
+\end{tikzpicture}
+\end{center}
+
+% TODO Mostrar que faz o que promete
+
+\subsubsection{(b)}
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=5.3cm,
+                    semithick]
+
+	\node[initial,state]   (A)              {};
+	\node[state]		   (B) [right of=A] {};
+	\node[state]		   (C) [below of=B,yshift=3.5cm] {};
+	\node[state,accepting] (D) [right of=B] {$q_\text{aceita}$};
+
+	\path (A) edge [loop above]	 node {$\sigma_1,\sigma_2\rightarrow(\sigma_1,D),(\sigma_2,F), \sigma_1\neq (, \sigma_2\in\Sigma$} (A)
+			  edge				 node {$(,\sigma\rightarrow ((,D),(\sigma,F), \sigma\in\Sigma$} (B)
+		  (B) edge [loop above]	 node {$\sigma,\sigma\rightarrow(\sigma,D),(\sigma',D), \sigma\in\Sigma$} (B)
+			  edge				 node {$,,\text{\textvisiblespace}\rightarrow (,,D),(\text{\textvisiblespace},D)$} (D)
+			  edge				 node {$\sigma_1,\sigma_2\rightarrow (\sigma_1,F),(\sigma_2,E),\sigma_1\neq\sigma_2,\sigma_1\in\Gamma,\sigma_2\in\Sigma$} (C)
+		  (C) edge [loop below]  node {$\sigma_1,\sigma_2'\rightarrow (\sigma_1,F),(\sigma_2,E),\sigma_1\in\Gamma,\sigma_2\in\Sigma$} (C)
+			  edge				 node {$\sigma_1,\sigma_2\rightarrow (\sigma_1,F),(\sigma_2,F),\sigma_1\in\Gamma,\sigma_2\in\Sigma$} (A);
+\end{tikzpicture}
+\end{center}
+
+Onde $\sigma'$ é a letra $\sigma$ com uma marcação, $\Sigma$ é o alfabeto de entrada, $\Gamma=\Sigma\cup\{\sigma'|\sigma\in\Sigma\}\cup\{(,,,\text{\textvisiblespace}\}, \Sigma\cap\{\sigma'|\sigma\in\Sigma\} = \emptyset$.
+
+% TODO Mostrar que faz o que promete
+
+\section{Exercício 5}
+Considere MT que, a cada configuração, ou podem escrever um símbolo ou podem mover a cabeça de leitura.
+
+\begin{enumerate}[(a)]
+	\item Escreva uma definição formal desse tipo de MT
+	\item Mostre que as linguagens reconhecidas por essas MT são exatamente as linguagens Turing-reconhecíveis.
+\end{enumerate}
+
+\subsection{Resolução}
+
+\subsubsection{(a)}
+
+Uma MT com essas restrições é definida pela quíntupla $M=(Q,s,\Sigma,\Gamma,\delta)$:
+
+\begin{itemize}
+	\item $Q$: conjunto finito de estados;
+	\item $s\in Q$: estado inicial;
+	\item $\Sigma$: alfabeto de entrada;
+	\item $\Gamma$: alfabeto da fita: $\Sigma\subseteq\Gamma,\text{\textvisiblespace}\in\Gamma\setminus\Sigma$;
+	\item $\delta: Q\times\Gamma\rightarrow Q\times\Gamma\times\{E,D,F\}$ tal que $\delta(p,\sigma) = (q,\tau,F), \sigma,\tau\in\Gamma$ ou $\delta(p,\sigma) = (q,\sigma,d), d\in\{E,D\}$.
+\end{itemize}
+
+\subsubsection{(b)}
+
+Como essas MTs são um subconjunto de MT então basta mostrar que qualquer MT pode ser descrita com essas restrições. Considere uma transição qualquer: $\delta(p,\sigma) = (q,\tau,d)$. O mesmo efeito é obtido utilizando as restrições da seguinte forma (só é necessário considerar o caso em que $d\in\{E,D\}$): 
+
+\begin{itemize}
+	\item Adicionamos um estado $r$, $r\not\in Q$, intermediário que será utilizado somente para essa transição;
+	\item $\delta(p,\sigma) = (r,\tau,F)$;
+	\item $\delta(r,\tau) = (q,\tau,d)$.
+\end{itemize}
+
+\section{Exercício 6}
+
+Construa MT's que computem as seguintes funções (convenção: a entrada deve estar na fita 1 - pode ter qualquer número de fitas - e a saída é o conteúdo da fita 1 na parada):
+
+\begin{enumerate}[(a)]
+	\item $f(w) = ww$
+	\item $f(n) = 2^n$ - isto são dois problemas:
+	\begin{enumerate}[i.]
+		\item Números expressos em unário: $n$ é dado como $a^n$
+		\item Números expressos em binário
+	\end{enumerate}
+\end{enumerate}
+
+\subsection{Resolução}
+
+\subsubsection{(a)}
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=4.8cm,
+                    semithick]
+
+	\node[initial,state]   (A)              {};
+	\node[state]		   (B) [right of=A] {};
+	\node[state]		   (C) [below of=A, yshift=3cm] {};
+	\node[state]		   (D) [right of=C] {};
+	\node[state,accepting] (E) [right of=D] {$q_\text{aceita}$};
+
+	\path (A) edge [loop above]	 node {$\sigma,\text{\textvisiblespace}\rightarrow(\sigma',D),(\sigma,D), \sigma\in\Gamma$} (A)
+			  edge				 node {$\text{\textvisiblespace,\textvisiblespace}\rightarrow (\text{\textvisiblespace},E),(\text{\textvisiblespace},E)$} (B)
+		  (B) edge [loop above]  node {$\sigma',\sigma\rightarrow (\sigma,E),(\sigma,E), \sigma\in\Sigma$} (B)
+			  edge				 node[pos=0.25] {$\sigma,\sigma\rightarrow (\sigma,F),(\sigma,F), \sigma\in\Sigma$} (C)
+		  (C) edge [loop below]  node {$\sigma_1,\sigma_2\rightarrow (\sigma_1,D),(\sigma_2,F)$} (C)
+			  edge				 node {\textvisiblespace,$\sigma\rightarrow (\sigma,D),(\sigma,D)$} (D)
+		  (D) edge [loop below]  node {\textvisiblespace,$\sigma\rightarrow (\sigma,D),(\sigma,D)$} (D)
+			  edge				 node {\textvisiblespace,\textvisiblespace$\rightarrow$ (\textvisiblespace,$F$),(\textvisiblespace,$F$)} (E);
+\end{tikzpicture}
+\end{center}
+
+Onde $\sigma'$ é a letra $\sigma$ com uma marcação, $\sigma'\not\in\Sigma$.
+
+% TODO Mostrar que faz o que promete
+
+\subsubsection{(b.i.)}
+
+Utilizaremos a MT construída no item anterior representada por um quadrado. Transições que chegam no quadrado vão para o estado inicial e transições que saem do quadrado saem do estado de aceitação (que não é mais final). Além disso a segunda fita utilizada pela MT auxiliar é diferente da segunda fita utilizada por esta MT (por simplicidade não mostraremos o que acontece na fita que não está sendo utilizada, pois sempre fica parada). Supomos que na MT auxiliar sempre ocorre um pré-processamento que leva a cabeça de leitura das duas fitas de volta para a posição inicial.
+
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=4.8cm,
+                    semithick]
+
+	\node[initial,state]			(A)              {};
+	\node[state]					(B) [right of=A] {};
+	\node[state]					(C) [below of=A, yshift=2cm] {};
+	\node[state,shape=rectangle]	(D) [below of=C, yshift=2cm] {};
+	\node[state,accepting]			(E) [right of=C] {$q_\text{aceita}$};
+
+	\path (A) edge [loop above]	 node {$a,\text{\textvisiblespace}\rightarrow(a,D),(a,D)$} (A)
+			  edge				 node {$\text{\textvisiblespace,\textvisiblespace}\rightarrow (\text{\textvisiblespace},E),(\text{\textvisiblespace},E)$} (B)
+		  (B) edge [loop above]  node {$a,a\rightarrow ($\textvisiblespace$,E),(a,F)$} (B)
+			  edge				 node[pos=0.25] {$\begin{matrix}\text{\textvisiblespace},a\rightarrow (a,D),(a,F)\\\text{\textvisiblespace,\textvisiblespace}\rightarrow (a,D),(\text{\textvisiblespace},F)\end{matrix}$} (C)
+		  (C) edge [bend right]  node [swap]{\textvisiblespace,$a\rightarrow ($\textvisiblespace$,E),(a,F)$} (D)
+			  edge				 node {\textvisiblespace,\textvisiblespace$\rightarrow ($\textvisiblespace$,F),($\textvisiblespace$,F)$} (E)
+		  (D) edge [bend right]  node [swap]{\textvisiblespace,$a\rightarrow ($\textvisiblespace$,F),($\textvisiblespace$,E)$} (C);
+\end{tikzpicture}
+\end{center}
+
+% TODO Mostrar que faz o que promete
+
+\subsubsection{(b.ii.)}
+
+% Não vou desenhar a MT porque vai ficar muito grande
+
+% Utilizaremos 4 fitas
+% Fita 1: Principal
+% Fita 2: Cópia da principal
+% Fita 3: Índica da potência de 2 atual em unário
+% Fita 4: Cópia da fita 3
+
+% Copia da fita 1 para a fita 2 apagando a fita 1. Coloca 1 na fita 1. Vai até a direita da fita 2. Para cada letra (0,1) coloca um 0 na fita 3 e a apaga da fita 2 indo para a esquerda. Se for 1 copia o conteúdo da fita 3 para a 4 e a usa como fita principal da MT do item (a). Depois copia o resultado na fita 4 para a direita da fita 1. Quando a fita 2 está vazia acaba o programa.
+
+\end{document}
