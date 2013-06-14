@@ -1,4 +1,4 @@
-NAME=lista4-3313220
+NAME=lista4sol
 
 ${NAME}.pdf: ${NAME}.tex
 	pdflatex ${NAME}.tex
