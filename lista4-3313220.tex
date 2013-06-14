@@ -90,6 +90,20 @@
     de $a^nb^{2n}$. Dessa forma, obtemos $a^nb^mc^{2m}c^{2n} =
     a^nb^mc^{2(m+n)} \in L$.
 
+    \item $\{w \in \{a,b\}^* \mid$ o número de $a$'s é o dobro do número de
+    $b$'s$\}$
+
+    $S \rightarrow SA \mid AS \mid \lambda\\
+     A \rightarrow aab \mid aba \mid baa$
+
+     Na primeira regra, a gramática acima pode produzir $\lambda \in L$ ou
+     seguir para a segunda regra $A$ que, por sua vez, possui todas as palavras
+     de comprimento mínimo $\in L$ (excluindo $\lambda$ da regra anterior), ou
+     seja, todas as permutações de $aab$. Através da recursão na primeira regra,
+     tanto pela esquerda quanto pela direita, podemos gerar todas as palavras de
+     $L$.  Portanto, todas as palavras de $L$ são geradas pela gramática e todas
+     as palavras geradas pela gramática pertencem a $L$.
+
   \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Questão 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
