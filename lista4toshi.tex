@@ -274,34 +274,27 @@ Construa MT para as seguintes linguagens (explicando como funcionam):
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
 
-	\node[initial,state]     (A)              {};
-	\node[state]		     (B) [above right of=A] {};
-	\node[state]		     (C) [left of=B] {};
-	\node[state]		     (D) [below right of=A] {};
-	\node[state]		     (E) [left of=D] {};
-	\node[state,accepting]   (F) [below right of=B] {$q_\text{aceita}$};
+	\node[initial,initial where=below,state]     (A)              {};
+	\node[state]		     (B) [right of=A, xshift=1cm] {};
+	\node[state]			 (C) [right of=B] {};
+	\node[state]			 (D) [left of=A] {};
+	\node[state,accepting]   (F) [above of=D] {$q_\text{aceita}$};
 
 
-	\path (A) edge [loop right]	 node {$\begin{matrix}a'\rightarrow a',D\\b'\rightarrow b',D\end{matrix}$} (A)
-			  edge [bend left]   node [swap]{$a\rightarrow a', D$} (B)
-			  edge [bend right]  node {$b\rightarrow b', D$} (D)
-		  (B) edge [loop above]  node {$\begin{matrix}a\rightarrow a,D\\a'\rightarrow a',D\\b'\rightarrow b',D\end{matrix}$} (B)
-			  edge				 node [swap]{$b\rightarrow b',E$} (C)
-			  edge				 node {$\text{\textvisiblespace,\textvisiblespace}, D$} (F)
-		  (C) edge [loop above]  node {$\begin{matrix}b'\rightarrow b',E\\a\rightarrow a,E\end{matrix}$} (C)
-			  edge				 node [swap]{$a'\rightarrow a',D$} (A)
-		  (D) edge [loop below]  node {$\begin{matrix}b\rightarrow b,D\\a'\rightarrow a',D\\b'\rightarrow b',D\end{matrix}$} (D)
-			  edge				 node {$a\rightarrow a',E$} (E)
-			  edge				 node [swap]{$\text{\textvisiblespace,\textvisiblespace}, D$} (F)
-		  (E) edge [loop below]  node {$\begin{matrix}a'\rightarrow a',E\\b\rightarrow b,E\end{matrix}$} (E)
-			  edge				 node {$b'\rightarrow b',D$} (A);
+	\path (A) edge				 node {$a\rightarrow a', D$} (B)
+			  edge				 node [swap, pos=0.25]{$b\rightarrow b', D$} (F)
+			  edge				 node {$b'\rightarrow b', D$} (D)
+		  (B) edge [loop above]  node {$\begin{matrix}a\rightarrow a, D\\b'\rightarrow b', D\end{matrix}$} (B)
+			  edge				 node {$b\rightarrow b', E$} (C)
+			  edge				 node [swap]{\textvisiblespace$\rightarrow$\textvisiblespace, D} (F)
+		  (C) edge [loop above]  node {$\begin{matrix}a\rightarrow a, E\\b'\rightarrow b', E\end{matrix}$} (C)
+			  edge [bend left]   node {$a'\rightarrow a', D$} (A)
+		  (D) edge [loop below]  node {$b'\rightarrow b', D$} (D)
+			  edge				 node [swap, pos=0.25]{$b\rightarrow b, D$} (F);
 \end{tikzpicture}
 \end{center}
 
 % TODO mostrar que reconhece L
-% Para voltar para A não ocorre a (embaixo) e b (em cima)
-% Encontra o par e volta até a parte já lida
-% A esquerda do estado inicial já foi tudo lido
 
 \subsubsection{(b)}
 
