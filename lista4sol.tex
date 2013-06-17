@@ -72,24 +72,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Questão 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Construa gramáticas
   \begin{enumerate}
-    \item $L = \{a^nb^mc^{2(m+n)} \mid m, n > 0\}$
+    \item $L = \{a^nb^mc^{2(m+n)} \mid m, n \geq 0\}$
 
     Seja a gramática $G$:
 
     \begin{enumerate}
-      \item $S \rightarrow aScc$ \label{regra1a1}
-      \item $S \rightarrow aBcc$ \label{regra1a2}
-      \item $B \rightarrow bBcc$ \label{regra1a3}
-      \item $B \rightarrow bcc$ \label{regra1a4}
+      \item $S \rightarrow aScc \mid B$
+      \item $B \rightarrow bBcc \mid \lambda$
     \end{enumerate}
-
-    A menor derivação possível é $S \Rightarrow aBcc \Rightarrow abcccc$ que
-    gera a menor palavra de $L$ ($m, n = 1 > 0$). A última regra produz $bcc$,
-    utilizado na terceira para gerar palavras do tipo $b^mc^{2m}$. A primeira
-    regra torna possível prefixar $a^n$ e sufixar $c^{2n}$. Por fim, a segunda
-    regra permite inserir $b^mc^{2m}$ entre um $a$ e um $c$ de $a^nb^{2n}$.
-    Dessa forma, obtemos palavras do tipo $a^nb^mc^{2m}c^{2n} =
-    a^nb^mc^{2(m+n)}$. Portanto $L(G) = L$.
 
     \item $L = \{w \in \{a,b\}^* \mid$ o número de $a$'s é o dobro do número de
     $b$'s$\}$
