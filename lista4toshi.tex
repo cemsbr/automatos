@@ -279,22 +279,26 @@ Construa MT para as seguintes linguagens (explicando como funcionam):
 	\node[state]			 (E) [above right of=B] {};
 	\node[state]			 (C) [below right of=E] {};
 	\node[state]			 (D) [left of=A] {};
+	\node[state]			 (G) [left of=D] {};
 	\node[state,accepting]   (F) [above of=D] {$q_\text{aceita}$};
 
 
 	\path (A) edge				node {$a\rightarrow a', D$} (B)
-			  edge				node {$\begin{matrix}b\rightarrow b, D\\b'\rightarrow b', D\end{matrix}$} (D)
+			  edge [bend right] node [swap]{$b\rightarrow b, D$} (G)
+			  edge				node {$b'\rightarrow b', D$} (D)
 		  (B) edge [loop above] node {$a\rightarrow a, D$} (B)
 			  edge				node [swap,pos=0.6]{$b'\rightarrow b', D$} (E)
 			  edge				node {$b\rightarrow b', E$} (C)
 			  edge				node [swap]{\textvisiblespace$\rightarrow$\textvisiblespace, $D$} (F)
 		  (C) edge [loop above] node {$\begin{matrix}a\rightarrow a, E\\b'\rightarrow b', E\end{matrix}$} (C)
 			  edge [bend left]  node {$a'\rightarrow a', D$} (A)
-		  (D) edge [loop below] node {$\begin{matrix}b\rightarrow b, D\\b'\rightarrow b', D\end{matrix}$} (D)
-			  edge				node [swap, pos=0.25]{\textvisiblespace$\rightarrow$\textvisiblespace, $D$} (F)
+		  (D) edge [loop below] node {$b'\rightarrow b', D$} (G)
+			  edge				node {$b\rightarrow b, D$} (G)
 		  (E) edge [loop above] node {$b'\rightarrow b', D$} (E)
 			  edge				node [swap]{\textvisiblespace$\rightarrow$\textvisiblespace, $D$} (F)
-			  edge				node [pos=0]{$b\rightarrow b', E$} (C);
+			  edge				node [pos=0]{$b\rightarrow b', E$} (C)
+		  (G) edge [loop below] node {$b\rightarrow b, D$} (G)
+			  edge				node {\textvisiblespace$\rightarrow$\textvisiblespace, $D$} (F);
 \end{tikzpicture}
 \end{center}
 
