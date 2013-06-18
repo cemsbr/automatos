@@ -8,6 +8,11 @@
 \usepackage{amssymb} % therefore
 \geometry{a4paper,left=3cm,right=3cm,top=2.5cm,bottom=2.5cm}
 
+% automata drawing
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,positioning}
+
 \begin{document}
 \begin{titlepage}
 
@@ -147,7 +152,30 @@
   \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Questão 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item
+\item Construa AP, de preferência determinístico
+  \begin{enumerate}
+    \item $\{0^n1^n2^k \mid n,k \geq 0\}$
+
+    \begin{tikzpicture}[very thick, -stealth, shorten >=1pt,node distance=2cm,on
+    grid,auto, scale=0.8]
+
+    \node[state, initial, accepting] (0) at (0,0) {$q_0$};
+    \node[state] (1) at (5, 0) {$q_1$};
+    \node[state] (2) at (5, -5) {$q_2$};
+    \node[state] (3) at (5, -10) {$q_3$};
+    \node[state, accepting] (4) at (0, -5) {$q_4$};
+
+    \path
+    (0) edge node {$\lambda, \lambda \rightarrow \$$} (1)
+    (1) edge node {$1, 0 \rightarrow \lambda$} (2)
+        edge[loop right] node {$0, \lambda \rightarrow 0$} ()
+    (2) edge node {$2, \lambda \rightarrow \lambda$} (3)
+        edge[loop right] node {$1, 0 \rightarrow \lambda$} ()
+        edge node[swap] {$\lambda, \$ \rightarrow \lambda$} (4)
+    (3) edge node {$\lambda, \$ \rightarrow \lambda$} (4)
+        edge[loop right] node {$2, \lambda \rightarrow \lambda$} ();
+    \end{tikzpicture}
+  \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Questão 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item
