@@ -1,3 +1,4 @@
+SHELL=/bin/bash
 NAME=lista4sol
 
 ${NAME}.pdf: ${NAME}.tex
